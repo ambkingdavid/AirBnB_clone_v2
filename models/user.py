@@ -6,6 +6,7 @@ from sqlalchemy import Column
 from sqlalchemy import String
 from sqlalchemy.orm import relationship
 
+
 class User(BaseModel, Base):
     """This class defines a user by various attributes
     Attributes:

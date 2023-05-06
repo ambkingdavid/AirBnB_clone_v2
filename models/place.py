@@ -8,6 +8,7 @@ from sqlalchemy import Column, Float, ForeignKey, Integer, String, String
 from sqlalchemy import Table
 from sqlalchemy.orm import relationship
 
+
 class Place(BaseModel, Base):
     """ A place to stay
     Attributes:
