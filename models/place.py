@@ -4,9 +4,20 @@ import models
 from os import getenv
 from models.base_model import BaseModel
 from models.base_model import Base
-from sqlalchemy import Column, Float, ForeignKey, Integer, String, String
+from models.amenity import Amenity
+from models.review import Review
+from sqlalchemy import Column, Float, ForeignKey, Integer, String
 from sqlalchemy import Table
 from sqlalchemy.orm import relationship
+
+
+association_table = Table("place_amenity", Base.metadata,
+                          Column("place_id", String(60),
+                                 ForeignKey("places.id"),
+                                 primary_key=True, nullable=False),
+                          Column("amenity_id", String(60),
+                                 ForeignKey("amenities.id"),
+                                 primary_key=True, nullable=False))
 
 
 class Place(BaseModel, Base):
@@ -35,6 +46,9 @@ class Place(BaseModel, Base):
     latitude = Column(Float)
     longitude = Column(Float)
     reviews = relationship("Review", backref="place", cascade="delete")
+    amenities = relationship("Amenity", secondary="place_amenity",
+                             viewonly=False)
+    amenity_ids = []
     if getenv("HBNB_TYPE_STORAGE", None) != "db":
         @property
         def reviews(self):
