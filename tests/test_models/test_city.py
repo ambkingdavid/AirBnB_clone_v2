@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Defines unnittests for models/city.py."""
 import os
-import pep8
+import pycodestyle
 import models
 import MySQLdb
 import unittest
@@ -66,7 +66,7 @@ class TestCity(unittest.TestCase):
 
     def test_pep8(self):
         """Test pep8 styling."""
-        style = pep8.StyleGuide(quiet=True)
+        style = pycodestyle.StyleGuide(quiet=True)
         p = style.check_files(["models/city.py"])
         self.assertEqual(p.total_errors, 0, "fix pep8")
 
